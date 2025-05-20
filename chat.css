@@ -1,0 +1,192 @@
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* Chat container styles */
+.chat-container {
+  width: 90%;
+  height: 90vh;
+  max-width: 1200px;
+  background: #fff;
+  background: 
+    linear-gradient(45deg, rgba(211, 193, 247, 0.25) 0%, #ffffff 50%, rgba(211, 193, 247, 0.3) 100%),
+    linear-gradient(125deg, rgba(211,193,247,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 40%) left / calc(50% + 1px) 100% no-repeat,
+    linear-gradient(50deg, rgba(255,255,255,1) 65%, rgba(211,193,247,1) 100%, rgba(211,193,247,1) 100%) right / 50% 100% no-repeat;
+  border-radius: 8px;
+  border: 0px solid #363636;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* Close button styles */
+.close-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  background: transparent;
+  color: #6b7280;
+  padding: 0;
+  z-index: 20;
+}
+
+.close-button:hover {
+  opacity: 0.7;
+}
+
+/* Chat header styles */
+.chat-header {
+  padding-bottom: 1.5rem;
+  background-color: transparent;
+  position: relative;
+}
+
+/* Split container styles */
+.split-container {
+  display: flex;
+  height: 100%;
+  transition: all 0.3s ease;
+  justify-content: center;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* When canvas is present, align to start */
+.split-container.with-canvas {
+  justify-content: flex-start;
+}
+
+/* Chat section styles */
+.chat-section {
+  min-width: 30%;
+  max-width: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  height: 100%;
+  position: relative;
+  transition: width 0.5s ease-in, max-width 0.5s ease-in;
+}
+
+/* Canvas section styles */
+.canvas-section {
+  width: 50%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in;
+  will-change: transform, opacity;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+/* Message list styles */
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  background-color: transparent;
+  width: 100%;
+  padding-bottom: 100px; /* Increased space for input bar and typing indicator */
+}
+
+/* Input bar styles */
+.input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  background-color: transparent;
+  width: calc(100% - 48px); /* Account for left and right padding */
+  margin-bottom: 10px; /* Add 10px bottom margin */
+}
+
+.input-container {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.message-input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: none;
+  background: transparent;
+  font-size: 0.9375rem;
+  color: #1f2937;
+  outline: none;
+}
+
+.message-input::placeholder {
+  color: #9ca3af;
+}
+
+.send-button {
+  padding: 0.875rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.send-button .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* Only transform the send icon */
+.send-button .material-symbols-outlined:is([data-icon="send"]) {
+  transform-origin: center;
+  transform: rotate(-35deg);
+}
+
+.send-button:hover {
+  background-color: #333;
+}
+
+.send-button:disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+} 
