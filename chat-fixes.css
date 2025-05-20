@@ -1,0 +1,25 @@
+/* Additional fixes for chat styling issues */
+/* Material icons specific fixes */
+.send-button span.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  display: inline-block;
+  transform: rotate(-35deg);
+}
+
+/* Message list and message styling fixes */
+.message-list {
+  min-height: 200px;
+}
+
+/* Chat container style fixes */
+.chat-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Fixes for SVG logo */
+.chat-header svg {
+  height: 24px;
+  width: auto;
+} 

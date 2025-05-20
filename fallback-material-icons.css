@@ -1,0 +1,10 @@
+/* Fallback for the send icon if Material Icons doesn't load */
+.send-button .material-symbols-outlined[data-icon="send"]::before {
+  content: "→"; /* Use a simple arrow as fallback */
+  display: inline-block;
+}
+
+.send-button .material-symbols-outlined[data-icon="send"]:empty::before {
+  content: "→";
+  display: inline-block;
+} 
