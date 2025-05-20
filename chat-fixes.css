@@ -6,6 +6,46 @@
   transform: rotate(-35deg);
 }
 
+/* Logo fallback styling */
+.chat-header img {
+  max-height: 24px;
+  width: auto;
+  display: inline-block;
+}
+
+.chat-header .flex-1 {
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+
+/* Logo fallback styling - PNG version */
+.chat-header img[src*="AiroHQ/gd-airo-lockup.png"] {
+  max-height: 24px;
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Logo fallback styling - SVG version */
+.chat-header img[src*="gd-airo-lockup.svg"] {
+  max-height: 24px;
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* If both image types fail to load, show text fallback */
+.chat-header svg text {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  fill: #744BC4;
+}
+
+.chat-header svg circle {
+  fill: #744BC4;
+}
+
 /* Message list and message styling fixes */
 .message-list {
   min-height: 200px;
