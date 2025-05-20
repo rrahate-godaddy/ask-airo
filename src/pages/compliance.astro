@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ComplianceChat from '../components/ComplianceChat';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Compliance Chat Assistant</title>
+	</head>
+	<body class="antialiased">
+		<Layout title="Compliance Chat Assistant">
+			<ComplianceChat client:load />
+		</Layout>
+	</body>
+</html> 

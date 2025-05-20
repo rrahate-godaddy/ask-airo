@@ -1,0 +1,26 @@
+[
+  {
+    "trigger": "APMC_WELCOME",
+    "reply": "Hi! I'm your Advanced Marketing Consultant. I'm here to help you develop effective marketing strategies for your business. Let's work together to boost your marketing efforts!"
+  },
+  {
+    "trigger": "COMPLIANCE_WELCOME",
+    "reply": "Hi, it looks like your site's missing a few key terms and policies. Take a look at what I recommend adding, and I'll help you create the right documents for your business."
+  },
+  {
+    "trigger": "hello",
+    "reply": "Hi there! How can I help?"
+  },
+  {
+    "trigger": "help",
+    "reply": "Sure—what would you like assistance with?"
+  },
+  {
+    "trigger": "bye",
+    "reply": "Goodbye! Have a great day!"
+  },
+  {
+    "trigger": ".*",
+    "reply": "Sorry, I didn't get that. Could you rephrase?"
+  }
+] 

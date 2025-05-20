@@ -1,0 +1,581 @@
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* Chat container styles */
+.chat-container {
+  width: 90%;
+  height: 90vh;
+  max-width: 1200px;
+  background: #fff;
+  background: 
+    linear-gradient(45deg, rgba(211, 193, 247, 0.25) 0%, #ffffff 50%, rgba(211, 193, 247, 0.3) 100%),
+    linear-gradient(125deg, rgba(211,193,247,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 40%) left / calc(50% + 1px) 100% no-repeat,
+    linear-gradient(50deg, rgba(255,255,255,1) 65%, rgba(211,193,247,1) 100%, rgba(211,193,247,1) 100%) right / 50% 100% no-repeat;
+  border-radius: 8px;
+  border: 0px solid #363636;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* Close button styles */
+.close-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  background: transparent;
+  color: #6b7280;
+  padding: 0;
+  z-index: 20;
+}
+
+.close-button:hover {
+  opacity: 0.7;
+}
+
+/* Chat header styles */
+.chat-header {
+  padding-bottom: 1.5rem;
+  background-color: transparent;
+  position: relative;
+}
+
+/* Split container styles */
+.split-container {
+  display: flex;
+  height: 100%;
+  transition: all 0.3s ease;
+  justify-content: center;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* When canvas is present, align to start */
+.split-container:has(.canvas-section) {
+  justify-content: flex-start;
+}
+
+/* Chat section styles */
+.chat-section {
+  min-width: 30%;
+  max-width: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  height: 100%;
+  position: relative;
+  transition: width 0.5s ease-in, max-width 0.5s ease-in;
+}
+
+/* Large viewport (1024px and above) */
+@media (min-width: 1024px) {
+  .chat-section {
+    max-width: 60%;
+    width: 60%;
+    transition: width 0.5s ease-in, max-width 0.5s ease-in;
+  }
+}
+
+/* When canvas or side panel is present */
+.split-container.with-side-panel .chat-section,
+.split-container.with-canvas .chat-section {
+  width: 50%;
+  max-width: 50%;
+  transition: width 0.5s ease-in, max-width 0.5s ease-in;
+}
+
+/* Canvas section styles */
+.canvas-section {
+  width: 50%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in;
+  will-change: transform, opacity;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.canvas-section > div {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+/* Container for the policy text */
+.canvas-section .overflow-auto {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100% - 120px);
+}
+
+/* Canvas animation styles */
+.split-container.canvas-animating .canvas-section {
+  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Chat width animation for when canvas appears */
+.split-container.canvas-animating .chat-section {
+  animation: shrinkChat 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shrinkChat {
+  from {
+    width: 80%;
+    max-width: 80%;
+  }
+  to {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+/* For large screens */
+@media (min-width: 1024px) {
+  .split-container.canvas-animating .chat-section {
+    animation: shrinkChatLarge 0.5s ease-in forwards;
+  }
+  
+  @keyframes shrinkChatLarge {
+    from {
+      width: 60%;
+      max-width: 60%;
+    }
+    to {
+      width: 50%;
+      max-width: 50%;
+    }
+  }
+}
+
+/* Side panel styles */
+.side-panel {
+  width: 400px;
+  min-width: 400px; /* Prevent shrinking */
+  background-color: #f8f9fa;
+  border-left: 1px solid #e9ecef;
+  padding: 20px;
+}
+
+.generator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.form-textarea {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.generate-button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.generate-button:hover {
+  background-color: #0052a3;
+}
+
+/* Message list styles */
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  background-color: transparent;
+  width: 100%;
+  padding-bottom: 100px; /* Increased space for input bar and typing indicator */
+}
+
+/* Chat bubble wrapper */
+.chat-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+/* Make bot messages with buttons take more space */
+.chat-bubble-wrapper:has(.nsb-buttons) .message-bubble.bot {
+  max-width: calc(100% - 40px);
+}
+
+/* Message bubble styles */
+.message-bubble {
+  width: fit-content;
+  max-width: calc(100% - 20px);
+  padding: 0.875rem 1.25rem;
+  border-radius: 1rem;
+  line-height: 1.5;
+  font-size: 0.9375rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Next Suggested Action Buttons (NSBs) container */
+.nsb-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 16px 0;
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+.nsb-buttons:last-child {
+  margin-right: 0;
+}
+
+/* Base NSB styles */
+.nsb-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: gdsherpa, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  text-align: center;
+  height: auto;
+  min-height: 32px;
+  line-height: 1.2;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  min-width: 80px;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 200px;
+  padding: 8px 12px;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+/* Primary NSB */
+.nsb-button[data-variant="primary"] {
+  background-color: #744BC4;
+  border: 1px solid #744BC4;
+  color: #FFFFFF;
+}
+
+.nsb-button[data-variant="primary"]:hover {
+  background-color: #633AA8;
+  border-color: #633AA8;
+}
+
+/* Secondary NSB */
+.nsb-button[data-variant="secondary"] {
+  background-color: transparent;
+  border: 1px solid #744BC4;
+  color: #744BC4;
+}
+
+.nsb-button[data-variant="secondary"]:hover {
+  background-color: rgba(116, 75, 196, 0.05);
+}
+
+.message-bubble.user {
+  margin-left: auto;
+  background-color: #F5F7F8;
+  color: #1f2937;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message-bubble.bot {
+  margin-right: auto;
+  background-color: #ffffff;
+  color: #1f2937;
+  border-bottom-left-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Input bar styles */
+.input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  background-color: transparent;
+  width: calc(100% - 48px); /* Account for left and right padding */
+  margin-bottom: 10px; /* Add 10px bottom margin */
+}
+
+/* Adjust input bar width when side panel or canvas is present */
+.split-container:not(.with-side-panel) .chat-section {
+  align-items: center;
+}
+
+/* When either side panel or canvas section is visible */
+.split-container.with-side-panel .chat-section,
+.split-container:has(.canvas-section:not(:empty)) .chat-section {
+  align-items: stretch;
+}
+
+.split-container.with-side-panel .input-bar,
+.split-container:has(.canvas-section:not(:empty)) .input-bar {
+  width: auto;
+  margin: 0 24px;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.message-input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: none;
+  background: transparent;
+  font-size: 0.9375rem;
+  color: #1f2937;
+  outline: none;
+}
+
+.message-input::placeholder {
+  color: #9ca3af;
+}
+
+.send-button {
+  padding: 0.875rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.send-button .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* Only transform the send icon */
+.send-button .material-symbols-outlined:is([data-icon="send"]) {
+  transform-origin: center;
+  transform: rotate(-35deg);
+}
+
+.send-button:hover {
+  background-color: #333;
+}
+
+.send-button:disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+/* Typing indicator styles */
+.typing-indicator {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  margin-left: 1.25rem;
+  position: absolute;
+  bottom: 80px; /* Position above input bar */
+  z-index: 1;
+}
+
+.typing-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #9ca3af;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Scrollbar styles */
+.message-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.message-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* When canvas is present */
+.split-container:has(.canvas-section) .chat-section {
+  width: 50%;
+  max-width: 50%;
+}
+
+/* Message bubble markdown styles */
+.message-bubble strong {
+  font-weight: 600;
+}
+
+.message-bubble p {
+  margin: 0;
+}
+
+.message-bubble p + p {
+  margin-top: 0.5rem;
+}
+
+/* Save button styles */
+.save-button {
+  padding: 0.875rem 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+}
+
+.save-button:hover {
+  background-color: #333;
+}
+
+.save-button:disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+/* Loading overlay styles */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.loading-overlay .typing-dots {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* For generated documents that might have longer content */
+.generated-document {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Style for compliance data display */
+.compliance-explanation {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+} 

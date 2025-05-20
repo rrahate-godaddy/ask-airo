@@ -1,4 +1,69 @@
-# Astro Starter Kit: Basics
+# Chat Assistant
+
+A lightweight chat application with iOS-style chat bubbles and configurable responses. Built with Astro, React, and Tailwind CSS.
+
+## Features
+
+- Clean, iOS-style chat interface
+- Configurable bot responses via JSON
+- Typing indicators
+- Auto-scrolling messages
+- Fully responsive design
+- Accessible with ARIA attributes
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16 or later
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd ask-airo
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:4321`.
+
+## Configuration
+
+Bot responses can be configured in `src/data/responses.json`. Each response has a trigger (string or regex) and a reply:
+
+```json
+[
+  {
+    "trigger": "hello",
+    "reply": "Hi there! How can I help?"
+  }
+]
+```
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+## License
+
+MIT
 
 ```sh
 npm create astro@latest -- --template basics
