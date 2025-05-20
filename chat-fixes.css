@@ -11,6 +11,43 @@
   min-height: 200px;
 }
 
+/* Chat bubble wrapper */
+.chat-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+/* Message bubble styles */
+.message-bubble {
+  width: fit-content;
+  max-width: calc(100% - 20px);
+  padding: 0.875rem 1.25rem;
+  border-radius: 1rem;
+  line-height: 1.5;
+  font-size: 0.9375rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.message-bubble.user {
+  margin-left: auto;
+  background-color: #F5F7F8;
+  color: #1f2937;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message-bubble.bot {
+  margin-right: auto;
+  background-color: #ffffff;
+  color: #1f2937;
+  border-bottom-left-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 /* Chat container style fixes */
 .chat-container {
   background: white;
@@ -22,4 +59,40 @@
 .chat-header svg {
   height: 24px;
   width: auto;
+}
+
+/* Make sure input is visible and properly sized */
+.message-input {
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+/* Fix send button appearance on all browsers */
+.send-button {
+  min-width: 48px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Fix the input container */
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  width: 100%;
 } 
