@@ -1,1 +1,0 @@
-import{j as s}from"./responses.bwXKcYgZ.js";import"./index.DK-fsZOb.js";function t(){return s.jsx("div",{className:"loading-overlay",children:s.jsxs("div",{className:"typing-dots",children:[s.jsx("div",{className:"typing-dot"}),s.jsx("div",{className:"typing-dot"}),s.jsx("div",{className:"typing-dot"})]})})}export{t as L};
