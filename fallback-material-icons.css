@@ -1,10 +1,24 @@
-/* Fallback for the send icon if Material Icons doesn't load */
-.send-button .material-symbols-outlined[data-icon="send"]::before {
-  content: "→"; /* Use a simple arrow as fallback */
+/* Fallback for the send icon if Material Icons doesn't load or is empty */
+.send-button .material-symbols-outlined[data-icon="send"]:empty::after {
+  content: "send";
+  font-family: 'Material Symbols Outlined', sans-serif;
   display: inline-block;
 }
 
-.send-button .material-symbols-outlined[data-icon="send"]:empty::before {
+/* Make sure the send icon rotates correctly */
+.send-button .material-symbols-outlined[data-icon="send"] {
+  display: inline-block;
+  transform: rotate(-35deg);
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
+/* If it still fails, use an arrow */
+.send-button .material-symbols-outlined:not([data-icon="send"])::before,
+.send-button:not(:has(.material-symbols-outlined))::before {
   content: "→";
   display: inline-block;
 } 

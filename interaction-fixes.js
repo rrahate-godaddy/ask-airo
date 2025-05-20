@@ -1,5 +1,59 @@
 // Fallback interaction script for chat components
 document.addEventListener('DOMContentLoaded', function() {
+  // Fix send button icons immediately
+  fixSendButtonIcons();
+  
+  // Check if React is already handling the chat (wait a few seconds first)
+  setTimeout(() => {
+    // If React is working, the astro-island will have no "ssr" attribute
+    const astroIslands = document.querySelectorAll('astro-island');
+    let reactIsWorking = false;
+    
+    astroIslands.forEach(island => {
+      if (!island.hasAttribute('ssr')) {
+        reactIsWorking = true;
+      }
+    });
+    
+    // Only apply our fallback if React is not working
+    if (!reactIsWorking) {
+      applyFallbackChatBehavior();
+    }
+    
+    // Fix icons again after React might have changed them
+    fixSendButtonIcons();
+  }, 2000); // Wait 2 seconds to see if React hydrates
+});
+
+// Function to fix the send button icons
+function fixSendButtonIcons() {
+  const sendButtons = document.querySelectorAll('.send-button');
+  
+  sendButtons.forEach(button => {
+    // Look for the material icon element
+    let iconElement = button.querySelector('.material-symbols-outlined[data-icon="send"]');
+    
+    // If it exists but is empty, set its text
+    if (iconElement) {
+      if (!iconElement.textContent.trim()) {
+        iconElement.textContent = 'send';
+      }
+    } 
+    // If no icon element exists at all, add our SVG
+    else if (!button.querySelector('svg')) {
+      // Use our SVG icon as fallback
+      button.innerHTML = `
+        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(12.000000, 12.000000) rotate(-35.000000) translate(-12.000000, -12.000000)" fill="currentColor">
+            <path d="M3,19 L21,12 L3,5 L3,9.5 L14,12 L3,14.5 L3,19 Z"></path>
+          </g>
+        </svg>`;
+    }
+  });
+}
+
+function applyFallbackChatBehavior() {
+  console.log("Applying fallback chat behavior");
   // Find send buttons
   const sendButtons = document.querySelectorAll('.send-button');
   
@@ -9,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if the message list is empty or doesn't have message content
     const messageSpace = container.querySelector('.space-y-4');
     
-    if (!messageSpace || !messageSpace.children.length) {
+    if (!messageSpace || !messageSpace.querySelector('.message-bubble')) {
       // Create or ensure the message space exists
       let messageSpaceElement = messageSpace;
       if (!messageSpaceElement) {
@@ -132,4 +186,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-}); 
+} 
