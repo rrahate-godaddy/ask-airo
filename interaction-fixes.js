@@ -1,5 +1,33 @@
 // Fallback interaction script for chat components
 document.addEventListener('DOMContentLoaded', function() {
+  // Fallback responses data
+  const fallbackResponses = [
+    {
+      "trigger": "APMC_WELCOME",
+      "reply": "Hi! I'm your Advanced Marketing Consultant. I'm here to help you develop effective marketing strategies for your business. Let's work together to boost your marketing efforts!"
+    },
+    {
+      "trigger": "COMPLIANCE_WELCOME",
+      "reply": "Hi, it looks like your site's missing a few key terms and policies. Take a look at what I recommend adding, and I'll help you create the right documents for your business."
+    },
+    {
+      "trigger": "hello",
+      "reply": "Hi there! How can I help?"
+    },
+    {
+      "trigger": "help",
+      "reply": "Sure—what would you like assistance with?"
+    },
+    {
+      "trigger": "bye",
+      "reply": "Goodbye! Have a great day!"
+    },
+    {
+      "trigger": ".*",
+      "reply": "Sorry, I didn't get that. Could you rephrase?"
+    }
+  ];
+
   // Fix send button icons immediately
   fixSendButtonIcons();
   
@@ -17,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Only apply our fallback if React is not working
     if (!reactIsWorking) {
-      applyFallbackChatBehavior();
+      applyFallbackChatBehavior(fallbackResponses);
     }
     
     // Fix icons again after React might have changed them
@@ -52,7 +80,21 @@ function fixSendButtonIcons() {
   });
 }
 
-function applyFallbackChatBehavior() {
+function findResponse(message, responses) {
+  const lowerMessage = message.toLowerCase();
+  const response = responses.find(r => {
+    try {
+      const regex = new RegExp(r.trigger, 'i');
+      return regex.test(lowerMessage);
+    } catch (e) {
+      // If regex fails, do a simple includes check
+      return lowerMessage.includes(r.trigger.toLowerCase());
+    }
+  });
+  return response?.reply || "I'm not sure how to respond to that.";
+}
+
+function applyFallbackChatBehavior(responses) {
   console.log("Applying fallback chat behavior");
   // Find send buttons
   const sendButtons = document.querySelectorAll('.send-button');
@@ -72,10 +114,21 @@ function applyFallbackChatBehavior() {
         container.appendChild(messageSpaceElement);
       }
       
+      // Determine which welcome message to use based on URL
+      let welcomeMessage = "Hi! I'm Airo, your personal assistant. How can I help you today?";
+      
+      // Check the URL to determine which chat we're in
+      const url = window.location.pathname;
+      if (url.includes('/compliance')) {
+        welcomeMessage = responses.find(r => r.trigger === 'COMPLIANCE_WELCOME')?.reply || welcomeMessage;
+      } else if (url.includes('/apmc')) {
+        welcomeMessage = responses.find(r => r.trigger === 'APMC_WELCOME')?.reply || welcomeMessage;
+      }
+      
       // Add a welcome message from the bot
       const botMessageBubble = document.createElement('div');
       botMessageBubble.className = 'message-bubble bot';
-      botMessageBubble.textContent = "Hi! I'm Airo, your personal assistant. How can I help you today?";
+      botMessageBubble.textContent = welcomeMessage;
       
       // Create wrapper
       const botWrapper = document.createElement('div');
@@ -124,6 +177,9 @@ function applyFallbackChatBehavior() {
           // Add to message list
           messageList.appendChild(wrapper);
           
+          // Get user message for response
+          const userMessage = input.value;
+          
           // Clear input
           input.value = '';
           
@@ -141,7 +197,9 @@ function applyFallbackChatBehavior() {
             // Create bot message bubble
             const botMessageBubble = document.createElement('div');
             botMessageBubble.className = 'message-bubble bot';
-            botMessageBubble.textContent = "I'm sorry, but I'm having trouble connecting to my backend services right now. Please try again later.";
+            
+            // Use our response finder instead of a hardcoded message
+            botMessageBubble.textContent = findResponse(userMessage, responses);
             
             // Create wrapper
             const botWrapper = document.createElement('div');
